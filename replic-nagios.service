@@ -1,0 +1,8 @@
+[Unit]
+Description=Replication of the Nagios
+
+[Service]
+ExecStart=/etc/replic-nagios
+
+[Install]
+WantedBy=multi-user.target

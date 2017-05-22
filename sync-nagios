@@ -1,0 +1,17 @@
+#!/bin/sh
+
+NAGIOSCONF=/usr/local/nagios
+NAGIOSARCHIVE=/root/replication-nagios/archive-nagios
+DATE=`date +"%d"`-`date +"%m"`-`date +"%y"`_`date +"%H"`:`date +"%M"`
+
+HOSTUSR=root
+HOSTSERV=10.100.141.11
+
+DISTUSR=root
+DISTSERV=10.100.141.16
+
+ssh $DISTUSR@$DISTSERV "tar czf $NAGIOSARCHIVE/$DATE.tar.gz $NAGIOSCONF"
+
+scp -r $NAGIOSCONF $DISTUSR@$DISTSERV:/usr/local
+
+ssh $DISTUSR@$DISTSERV "systemctl restart nagios"

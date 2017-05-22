@@ -1,0 +1,7 @@
+#!/bin/sh
+
+DISTUSR=root
+DISTSERV=10.100.141.16
+
+ssh-keygen -t rsa
+ssh-copy-id -i ~/.ssh/id_rsa.pub $DISTUSR@$DISTSERV

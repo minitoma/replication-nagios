@@ -1,0 +1,18 @@
+#!/bin/sh
+
+#WATCHINGFOLDER=/root/replication-nagios/watching-folder
+NAGIOSCONFIG=/usr/local/nagios
+
+inotifywait -mqr --exclude "$NAGIOSCONFIG/var" -e close_write "$NAGIOSCONFIG" | while read FILE 
+do
+#	echo $FILE
+#	BEGIN=$(echo $FILE | cut -d' ' -f 1)
+#	END=$(echo $FILE | cut -d' ' -f 3)
+#	echo $BEGIN
+#	echo $END
+
+#	PATHFILE=$BEGIN$END
+
+	./etc/sync-nagios
+	systemctl restart nagios
+done
